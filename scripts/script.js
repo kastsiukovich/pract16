@@ -1,15 +1,18 @@
 // task1
 var basket = document.getElementsByClassName('rem');
 var ul1 = document.querySelector('.collection');
-var liI = document.getElementsByTagName('li')
+var liI = document.getElementsByClassName('rem')
 
 ul1.addEventListener('click', function (e) {
     console.log(ul1.children.length)
-
-    if (e.target.className === 'material-icons' && ul1.children.length > 1) {
-        e.target.parentElement.parentElement.remove()
+    console.log(e.target.closest('.rem') != "null")
+    if (e.target.className === 'material-icons' && liI.length > 1) {
+        // if (e.target.closest('collection-item ') === 'null ' && e.target.closest('li') === "LI") {
+        e.target.closest('.rem').remove()
+        // e.target.closest('rem').remove()
     } else {
-        e.target.parentElement.parentElement.remove();
+        // e.target.parentElement.parentElement.remove();
+
         ul1.insertAdjacentHTML('beforeend', '<p>Empty to-do</p>')
     }
 })
@@ -80,27 +83,31 @@ var leagueWinners = document.querySelector('#h5-3');
 
 
 sel.addEventListener('input', (e) => {
-    infoList.forEach((item) => {
-        if (item.id == sel.value) {
-            img.src = item.url;
-            year.textContent = item.yearFoundation;
-            winners.textContent = item.championsLeague.toString();
-            leagueWinners.textContent = item.europaLeague.toString();
-            if (item.championsLeague.toString() === '' && item.europaLeague.toString() === '') {
-                winners.textContent = 'На данный момент нет кубков';
-                leagueWinners.textContent = 'На данный момент нет кубков';
-            } else if (item.europaLeague.toString() === '') {
-                leagueWinners.textContent = 'На данный момент нет кубков';
-            } else if (item.championsLeague.toString() === '')
-                winners.textContent = 'На данный момент нет кубков';
-        }
+    infoList.forEach((item, index, arr) => {
+        // console.log(item, index, arr)
+        console.log(arr[0].url)
+        // if (item.id == sel.value) {
+        //     img.src = item.url;
+        //     year.textContent = item.yearFoundation;
+        //     winners.textContent = item.championsLeague.toString();
+        //     leagueWinners.textContent = item.europaLeague.toString();
+        //     if (item.championsLeague.toString() === '' && item.europaLeague.toString() === '') {
+        //         winners.textContent = 'На данный момент нет кубков';
+        //         leagueWinners.textContent = 'На данный момент нет кубков';
+        //     } else if (item.europaLeague.toString() === '') {
+        //         leagueWinners.textContent = 'На данный момент нет кубков';
+        //     } else if (item.championsLeague.toString() === '')
+        //         winners.textContent = 'На данный момент нет кубков';
+        // }
     })
+
 });
 
 
 // task4
 var btn = document.querySelector('.btn')
 var li = document.querySelector('tbody');
+
 
 function sortNam() {
     var el = [].slice.call(li.children);
@@ -140,17 +147,38 @@ var searchList = [
     'Ленивец'
 ];
 
-var input7 = document.querySelectorAll('input')[0];
-var ul5 = document.getElementById('list');
-input7.addEventListener('input', () => {
-    searchList.forEach((item, index) => {
-        console.log([item])
-        if (item.toLowerCase().includes(input7.value.toLowerCase()) && input7.value.trim() != '') {
-            ul5.children[index].style.display = 'block'
-        } else if (ul5.children[index].style.display = 'block' && !item.includes(input7.value)) {
-            ul5.children[index].style.display = 'none'
-        } else if (input7.value.trim() === '') {
-            ul5.children[index].style.display = 'block'
+
+// вар 1
+var input8 = document.querySelectorAll('input')[0];
+var ul8 = document.getElementById('list');
+input8.addEventListener('input', function (e) {
+    // console.log(input8.value)
+    searchList.forEach(function callback(item, index) {
+        // console.log(item.toLowerCase())
+        console.log(!item.toLowerCase().includes(input8.value.toLowerCase()))
+        if (item.toLowerCase().includes(input8.value.toLowerCase()) && input8.value.trim() != '') {
+            ul8.children[index].style.display = 'block';
+        } else if (ul8.children[index].style.display = 'block' && !item.toLowerCase().includes(input8.value.toLowerCase())) {
+            ul8.children[index].style.display = 'none';
+        } else if (input8.value.trim() === '') {
+            ul8.children[index].style.display = 'block';
         }
     })
 })
+
+
+// вар 2
+// var input8 = document.querySelectorAll('input')[0];
+// var ul8 = document.getElementById('list');
+// function list() {
+//     for (let one of ul8.children) {
+//         console.log(input8.value.toLowerCase())
+//         if (one.textContent.toLowerCase().startsWith(input8.value.toLowerCase())) {
+//             one.style.display = 'block';
+//         } else {
+//             one.style.display = 'none';
+//         }
+//     }
+
+// }
+// input8.addEventListener('input', list)
